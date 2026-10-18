@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 1</title>
+</head>
+
+<body>
+  <h1>Ejercicio 1</h1>
+
+  <script>
+    function eliminarRepetidos(palabra) {
+      let resultado = "";
+
+      for (let i = 0; i < palabra.length; i++) {
+        let repetido = false;
+
+        for (let j = 0; j < resultado.length && !repetido; j++) {
+          if (palabra[i] === resultado[j]) {
+            repetido = true;
+          }
+        }
+
+        if (!repetido) {
+          resultado += palabra[i];
+        }
+      }
+
+      return resultado;
+    }
+
+    function contarLetras(palabra, segundaPalabra) {
+      let resultado = "";
+
+      for (let i = 0; i < palabra.length; i++) {
+        let cantidad = 0;
+
+        for (let j = 0; j < segundaPalabra.length; j++) {
+          if (palabra[i] === segundaPalabra[j]) {
+            cantidad++;
+          }
+        }
+
+        if (i > 0) {
+          resultado += ", ";
+        }
+        resultado += palabra[i] + "=" + cantidad;
+      }
+
+      return resultado;
+    }
+
+    let contador = 0;
+    do {
+      const primera = prompt("Ingrese la primera palabra del par " + (contador + 1) + ":") || "";
+      const segunda = prompt("Ingrese la segunda palabra del par " + (contador + 1) + ":") || "";
+      const primeraMayuscula = primera.toUpperCase();
+      const segundaMayuscula = segunda.toUpperCase();
+      const sinRepetidos = eliminarRepetidos(primeraMayuscula);
+      const cantidades = contarLetras(sinRepetidos, segundaMayuscula);
+
+      document.write("<p><strong>Par " + (contador + 1) + "</strong><br>");
+      document.write("Primera palabra ingresada: \"" + primera.toLocaleUpperCase() + "\"<br>");
+      document.write("Sin letras repetidas: \"" + sinRepetidos + "\"<br>");
+      document.write("Segunda palabra ingresada: \"" + segunda.toLocaleUpperCase() + "\"<br>");
+      document.write("Repeticiones de cada letra: " + cantidades + "</p>");
+
+      contador++;
+    } while (contador < 1);
+  </script>
+</body>
+
+</html>
