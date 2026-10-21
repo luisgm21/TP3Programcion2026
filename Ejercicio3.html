@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ahorcadito Básico</title>
+</head>
+<body>
+    <h2>El Ahorcadito</h2>
+    <p>Haz clic en el botón para iniciar.</p>
+    <button onclick="empezarAhorcadito()">Jugar Ahorcadito</button>
+
+    <script>
+        function empezarAhorcadito() {
+            alert("EMPECEMOS CON EL AHORCADITO");
+            
+            let palabra = prompt("Jugador 1 ingrese una palabra\n\n***ALERTA***\nSolo puedes ingresar una palabra hasta 6 letras");
+            
+            if (!palabra || palabra.length > 6 || palabra.length === 0) {
+                alert("Palabra inválida o mayor a 6 letras. Vuelve a intentar.");
+                return;
+            }
+
+            palabra = palabra.toLowerCase();
+            let n = palabra.length;
+            
+            let aux = [];
+            for(let i = 0; i < n; i++) {
+                aux.push("_");
+            }
+            
+            let intentosFallidos = 0;
+            let numeroJugada = 0;
+
+            alert(`***TE DOY UNA AYUDA***\nLa palabra tiene ${n} letras\n\nJUGADOR 2 EMPECEMOS`);
+
+            while (intentosFallidos < 6 && aux.includes("_")) {
+                numeroJugada++;
+                let m = prompt(`Adivine la letra (Jugada ${numeroJugada})\n\nTablero: ${aux.join(" ")}\nIntentos fallidos: ${intentosFallidos}/6`);
+
+                if (!m || m.length !== 1) {
+                    continue; 
+                }
+                
+                m = m.toLowerCase();
+                let band = 0; 
+
+                for (let j = 0; j < n; j++) {
+                    if (palabra[j] === m && aux[j] === "_") {
+                        aux[j] = m;
+                        band = 1;
+                    }
+                }
+
+                if (band === 1) {
+                    alert(`\nGENIAL!! vas armando la palabra ---> ${aux.join(" ")}\n`);
+                } else {
+                    intentosFallidos++;
+                }
+            }
+
+            if (!aux.includes("_")) {
+                alert(`\n\tFELICIDADES ADIVINASTE\n\n\tLa palabra es: ${palabra.toUpperCase()}\n\n`);
+            } else {
+                alert(`\n\tPERDISTE, MEJOR SUERTE EN LA PROXIMA\n\n\tLa palabra era: ${palabra.toUpperCase()}\n\n`);
+            }
+        }
+    </script>
+</body>
+</html>
