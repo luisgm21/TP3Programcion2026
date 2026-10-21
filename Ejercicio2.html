@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 2a - Distancias</title>
+</head>
+
+<body>
+  <h1>Ejercicio 2a - Distancias entre puntos</h1>
+
+  <script>
+    function calcularDistancia(x1, y1, x2, y2) {
+      let diferenciaX = x2 - x1;
+      let diferenciaY = y2 - y1;
+
+      return Math.sqrt(
+        diferenciaX * diferenciaX + diferenciaY * diferenciaY
+      );
+    }
+
+    function generarMatrizDistancias(puntos) {
+      let distancias = [];
+
+      for (let i = 0; i < puntos.length; i++) {
+        distancias[i] = [];
+
+        for (let j = 0; j < puntos.length; j++) {
+          if (i === j) {
+            distancias[i][j] = 0;
+          } else {
+            distancias[i][j] = calcularDistancia(
+              puntos[i][0],
+              puntos[i][1],
+              puntos[j][0],
+              puntos[j][1]
+            );
+          }
+        }
+      }
+
+      return distancias;
+    }
+
+    let puntos = [];
+
+    for (let i = 0; i < 10; i++) {
+      let x = Number(prompt("Ingrese la coordenada X del punto " + (i + 1) + ":"));
+      let y = Number(prompt("Ingrese la coordenada Y del punto " + (i + 1) + ":"));
+
+      puntos[i] = [x, y];
+    }
+
+    let matrizDistancias = generarMatrizDistancias(puntos);
+
+    document.write("<h2>Puntos ingresados</h2>");
+
+    for (let i = 0; i < puntos.length; i++) {
+      document.write(
+        "<p>Punto " + (i + 1) + ": (" +
+        puntos[i][0] + ", " + puntos[i][1] + ")</p>"
+      );
+    }
+
+    document.write("<h2>Matriz de distancias</h2>");
+
+    for (let i = 0; i < matrizDistancias.length; i++) {
+      document.write("<p>");
+
+      for (let j = 0; j < matrizDistancias[i].length; j++) {
+        document.write(matrizDistancias[i][j].toFixed(2));
+
+        if (j < matrizDistancias[i].length - 1) {
+          document.write(" | ");
+        }
+      }
+
+      document.write("</p>");
+    }
+  </script>
+</body>
+
+</html>
