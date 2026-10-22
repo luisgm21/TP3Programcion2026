@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 4</title>
+</head>
+<body>
+  <h1>Ejercicio 4 - Productos</h1>
+  <script>
+    let productos = [];
+
+    for (let i = 0; i < 15; i++) {
+      let codProducto = Number(prompt("Ingrese el código del producto " + (i + 1) + ":"));
+      let detalle = prompt("Ingrese el detalle del producto " + (i + 1) + ":") || "";
+      let Precio = Number(prompt("Ingrese el precio del producto " + (i + 1) + ":"));
+      let stock = Number(prompt("Ingrese el stock del producto " + (i + 1) + ":"));
+      let ubicacion = prompt("Ingrese la ubicación del producto " + (i + 1) + ":") || "";
+
+      let producto = {
+        codProducto: codProducto,
+        detalle: detalle,
+        Precio: Precio,
+        stock: stock,
+        "ubicación": ubicacion
+      };
+
+      productos.push(producto);
+    }
+
+    let productosOrdenados = productos.slice();
+
+    for (let i = 0; i < productosOrdenados.length - 1; i++) {
+      for (let j = i + 1; j < productosOrdenados.length; j++) {
+        if (productosOrdenados[i].codProducto > productosOrdenados[j].codProducto) {
+          let auxiliar = productosOrdenados[i];
+          productosOrdenados[i] = productosOrdenados[j];
+          productosOrdenados[j] = auxiliar;
+        }
+      }
+    }
+
+    document.write("<h2>Productos ingresados</h2>");
+    for (let i = 0; i < productos.length; i++) {
+      document.write("<p>Código: " + productos[i].codProducto +
+        " | Detalle: " + productos[i].detalle +
+        " | Precio: $" + productos[i].Precio +
+        " | Stock: " + productos[i].stock +
+        " | Ubicación: " + productos[i]["ubicación"] + "</p>");
+    }
+
+    document.write("<h2>Productos ordenados por código</h2>");
+    for (let i = 0; i < productosOrdenados.length; i++) {
+      document.write("<p>Código: " + productosOrdenados[i].codProducto +
+        " | Detalle: " + productosOrdenados[i].detalle +
+        " | Precio: $" + productosOrdenados[i].Precio +
+        " | Stock: " + productosOrdenados[i].stock +
+        " | Ubicación: " + productosOrdenados[i]["ubicación"] + "</p>");
+    }
+  </script>
+</body>
+</html>
